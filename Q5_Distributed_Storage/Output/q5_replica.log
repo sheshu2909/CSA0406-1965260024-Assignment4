@@ -1,0 +1,20 @@
+# q5_replica
+Task 5.2  one NFS server against three HDFS replicas
+20000 reads, node down with probability 0.5% per request, 8 ms per attempt
+
+design            | available | mean   | p50    | p95
+------------------+-----------+--------+--------+-------
+one NFS server    |  99.485%  |  8.99  |  8.99  |  9.90 ms
+3 replicas (HDFS) |  100.000%  |  9.04  |  9.01  |  9.91 ms
+
+replica fetches attempted: 20101 for 20000 reads (1.005 per read)
+
+storage and cost for 20 TB of data
+  one copy  :  20.0 TB, 400 USD per month
+  three copies:  60.0 TB, 1200 USD per month, 200% more storage
+
+consistency
+  asynchronous replica: 424 of 20000 reads (2.1%) could return old data
+  synchronous replica : 0 stale reads, but every write waits for the
+  slowest copy, so writes are slower and an unreachable copy can
+  block the writer (the CAP trade-off).

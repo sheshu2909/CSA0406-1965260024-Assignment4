@@ -1,0 +1,13 @@
+# q5_cache
+Task 5.3  buffering and caching on a real read
+file: tmp/q5_large.bin, 256 MB
+
+A. read(1 byte)      : 4194304 bytes in  10564.3 ms =     0.40 MB/s, 4194304 device requests
+B. read(4 KB)        : 268435456 bytes in    265.1 ms =  1012.59 MB/s, 65536 device requests
+C. fread(4 KB, 1 MB buffer): 268435456 bytes in 98.0 ms = 2738.37 MB/s, 65536 library calls
+
+A byte at a time costs one device request per byte; a 4 KB read
+costs one per block; the buffered stream lets the library hand
+the device large requests and serves the small ones from RAM.
+All three read the same bytes: the difference is the number of
+requests that reach the device, not the amount of data.

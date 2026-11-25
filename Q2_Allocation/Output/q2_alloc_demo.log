@@ -1,0 +1,18 @@
+# q2_alloc_demo
+after B and D released   |AAAAAA........CCCCC.............|
+free blocks: 21 in 2 runs, longest run 13 blocks at 19
+
+what size of request can still be met contiguously?
+   8 blocks -> placed at 6
+   9 blocks -> placed at 19
+  10 blocks -> placed at 19
+  11 blocks -> placed at 19
+  12 blocks -> placed at 19
+  13 blocks -> placed at 19
+  14 blocks -> FAILED (external fragmentation)
+  15 blocks -> FAILED (external fragmentation)
+  16 blocks -> FAILED (external fragmentation)
+
+the same request met by indexed allocation
+14 blocks: index block 6, data blocks 7 8 9 10 11 12 13 19 20 21 22 23 24 25
+after indexed allocation |AAAAAAeEEEEEEECCCCCEEEEEEE......|

@@ -1,0 +1,30 @@
+# q2_inode
+Task 2.3  maximum file size for the given inode
+block size        : 4096 bytes
+pointer size      : 4 bytes
+pointers per block: 1024
+
+  direct        12 pointers -> 12 blocks
+  single       1024 pointers -> 1024 blocks
+  double  1024^2 pointers -> 1048576 blocks
+  triple  1024^3 pointers -> 1073741824 blocks
+  ------------------------------------------------
+  total                  -> 1074791436 blocks
+  in bytes               -> 4402345721856 bytes
+  in human units         -> 4.004 TiB  (4.402 TB)
+
+reads needed to reach a block
+  blocks 0-11            : direct pointer       1 read
+  blocks 12-1035         : single indirect      2 reads
+  blocks 1036-1049611    : double indirect      3 reads
+  blocks above that      : triple indirect      4 reads
+
+how many bytes each level covers
+  direct    :    49152 bytes (48.0 KiB)
+  single    :  4194304 bytes (4.0 MiB)
+  double    : 4294967296 bytes (4096.0 MiB)
+  triple    : 4398046511104 bytes (4.000 TiB)
+
+the 4 GB file of the assignment needs 1048576 blocks,
+so it is described by the direct pointers plus part of the
+single-indirect block: it never touches the double indirect.

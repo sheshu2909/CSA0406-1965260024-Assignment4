@@ -1,0 +1,21 @@
+# q2_compare
+Task 2.2 / 2.3  allocation policies on the same workload
+disk 68 GB, block 4096 B, 6000 + 2000 files, every third file deleted
+
+policy                   | time ms |   extents | failed | largest GB | frag % | 1 GB?
+-------------------------+---------+-----------+--------+------------+--------+------
+contiguous first fit     |     4.0 |   1897519 |      0 |      13.69 |  10.72 |   yes
+contiguous best fit      |     8.1 |   3422730 |      0 |      14.98 |   2.33 |   yes
+contiguous worst fit     |    12.6 |   4008000 |     20 |       0.01 |  99.90 |    no
+   (20 of the 2000 new files could not be placed)
+indexed (one index block) |     2.9 |     17998 |      0 |      15.32 |   0.00 |   yes
+
+extents = free extents examined to place every file;
+frag %  = 1 - largest free extent / all free blocks
+
+reads needed to reach the last block of a 4 GB file (4 KB blocks)
+  contiguous : 1 read  (one seek to start + length)
+  indexed    : 2 reads (the index block, then the data block)
+  linked/FAT : 1048576 reads (one per block in the chain)
+  walking the chain in RAM took 2.27 ms, i.e. 2.2 ns per hop;
+  on a disk each hop is a seek, so the same walk costs seconds.

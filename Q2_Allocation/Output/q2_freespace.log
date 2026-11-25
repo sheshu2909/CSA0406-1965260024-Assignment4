@@ -1,0 +1,30 @@
+# q2_freespace
+Task 2.4  free-space management on a 4 TB disk
+disk 4398046511104 bytes, block 4096 bytes, 1073741824 blocks
+
+bit vector       : 1073741824 bits = 134217728 bytes  (128.0 MiB, 0.0031% of the disk)
+linked free list : 4 bytes per free block
+    10% free      : 107374182 entries = 409.6 MiB
+    40% free      : 429496729 entries = 1638.4 MiB
+    70% free      : 751619276 entries = 2867.2 MiB
+   100% free      : 1073741824 entries = 4096.0 MiB
+grouping (n=64)  : 16777216 groups x 4 bytes = 67108864 bytes (64.0 MiB)
+counting          : a count plus a pointer per group, about the same
+                    64.0 MiB, but it can skip 64 free blocks per step
+
+synthetic layout : 40.30% of the blocks in use
+
+measured search cost
+  bit vector, whole 4 TB disk
+    100,000 single-block allocations : 0.38 ms total, 4 ns each
+    first 64-block free run          : 0.209 ms, found at block 301694
+  free list, 1 M-block slice (41.0% free)
+    100,000 pops from the head       : 0.527 ms total, 5.3 ns each
+    first 64-block run in the list   : 0.000 ms, found at block 114451
+    (checksum over the popped blocks: 23239971055)
+
+Conclusion: the bit vector describes the whole 4 TB disk in 128.0 MiB
+and a run is found by reading words; the linked list pops in O(1)
+but costs 4 bytes per free block and must be walked to find a run.
+Grouping and counting cut that memory by the group size, which is
+why real file systems combine a bit vector or counts with extents.

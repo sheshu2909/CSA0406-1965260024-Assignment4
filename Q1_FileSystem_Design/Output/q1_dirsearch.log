@@ -1,0 +1,19 @@
+# q1_dirsearch
+Task 1.1  one flat directory versus a directory tree
+students in the directory : 12000
+look-ups performed        : 2000 each
+
+flat directory (unordered, linear scan)
+  comparisons per look-up : 6009.5
+  mean look-up time       : 23.180 us
+  total for 2000 searches : 46.36 ms
+  found                   : 2000
+
+three-level tree (dept / year / student, indexed leaf)
+  comparisons per look-up : 10.6
+  mean look-up time       : 0.326 us
+  total for 2000 searches : 0.65 ms
+  found                   : 2000
+
+speed-up of the tree    : 71.2x
+comparison ratio        : 565.3x fewer name comparisons

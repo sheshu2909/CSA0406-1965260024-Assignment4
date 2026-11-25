@@ -1,0 +1,21 @@
+# q1_growth
+Task 1.1  contiguous allocation under file growth
+disk              : 1 TB, 4 KB blocks, 268435456 blocks
+files             : 12000
+data placed       : 56.56 GB in 13808644 blocks
+creation          : 25.7 ms, 13808644 blocks examined
+
+growth rounds     : 40 x 300 single-block growth events
+grew in place     : 3703
+had to be moved   : 8297  (69.14% of growth events)
+blocks copied     : 9575619  (39.22 GB of extra writes)
+growth that failed: 0
+time for growth   : 30.6 ms
+free-space scans  : 9646193 blocks examined while growing
+
+final state
+  used            : 56.98 GB (5.18% of the disk)
+  free            : 1042.53 GB
+  longest free run: 244980619 blocks (1003440.62 MB), found in 192.6 ms
+  a new 512 MB file: placed
+  fragmentation   : 3.75% (1 - longest run / free blocks)

@@ -1,0 +1,14 @@
+# q4_starve
+Task 4.3  a request at cylinder 183 against a stream at 60
+5000 stream requests, one every 1.0 ms, service 2.0 ms per request
+
+algo   |   served |       wait | result
+-------+----------+------------+------------------------
+SSTF   |     5000 |    10002.0 ms | served
+SCAN   |        0 |        2.0 ms | served
+C-LOOK |        0 |        2.0 ms | served
+
+SSTF always takes the request nearest to the head, so the steady
+stream at 60 keeps the head at 60 and the request at 183 is never
+the nearest one: it starves.  SCAN and C-LOOK sweep the disk, so
+every cylinder is reached after a bounded number of requests.

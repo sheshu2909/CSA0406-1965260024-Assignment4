@@ -1,0 +1,38 @@
+# q4_all
+Task 4.1  the queue of the assignment (cylinders 0-199, head 53)
+
+  FCFS   head 53 98 183 37 122 14 124 65 67
+         movement 640 cylinders
+  SSTF   head 53 65 67 37 14 98 122 124 183
+         movement 236 cylinders
+  SCAN   head 53 37 14 0 65 67 98 122 124 183
+         movement 236 cylinders
+  C-SCAN head 53 65 67 98 122 124 183 199 0 14 37
+         movement 183 cylinders (+199 for the return jump)
+  LOOK   head 53 37 14 65 67 98 122 124 183
+         movement 208 cylinders
+  C-LOOK head 53 65 67 98 122 124 183 14 37
+         movement 153 cylinders (+ jump back to the lowest request)
+
+  hand check: FCFS 640, SSTF 236, SCAN 236, C-SCAN 183 (+199),
+  LOOK 208 and C-LOOK 153 of real movement plus the jump of 169.
+
+Task 4.2  10000 requests, batches of 1, 8 and 64
+service model: 0.020 ms per cylinder + 0.150 ms per request
+
+algo    | light avg | light max | medium avg | medium max |  heavy avg
+-------+----------+----------+------------+------------+-----------
+FCFS    |   0.00 ms |   0.00 ms |   4.69 ms |    19.07 ms |  42.21 ms
+        | movement  59.5 |          | movement  59.5 |            | movement  59.5
+SSTF    |   0.00 ms |   0.00 ms |   1.96 ms |     8.19 ms |   6.68 ms
+        | movement  59.5 |          | movement  22.5 |            | movement   3.3
+SCAN    |   0.54 ms |   4.11 ms |   2.23 ms |     9.12 ms |   6.71 ms
+        | movement 144.5 |          | movement  28.2 |            | movement   3.8
+C-SCAN  |   0.08 ms |   4.13 ms |   2.17 ms |     9.23 ms |   7.25 ms
+        | movement 394.2 |          | movement  49.4 |            | movement   6.2
+LOOK    |   0.00 ms |   0.00 ms |   2.08 ms |     8.57 ms |   6.65 ms
+        | movement  60.2 |          | movement  25.5 |            | movement   3.8
+C-LOOK  |   0.00 ms |   0.00 ms |   2.94 ms |     8.93 ms |   8.48 ms
+        | movement  60.2 |          | movement  34.0 |            | movement   6.0
+
+simulation time: 8 ms

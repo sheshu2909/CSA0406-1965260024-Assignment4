@@ -1,0 +1,38 @@
+# q4_sched_sys
+== ls /sys/block ==
+ls: cannot access '/sys/block': No such file or directory
+exit status: 0
+
+== the Linux scheduler file ==
+/sys/block/*/queue/scheduler: cat: '/sys/block/*/queue/scheduler': No such file or directory
+exit status: 0
+
+== lsblk ==
+src/q4_sched_sys.sh: line 23: lsblk: command not found
+exit status: 0
+
+== df -T . ==
+Filesystem     Type 1K-blocks      Used Available Use% Mounted on
+C:             ntfs 182934524 109924712  73009812  61% /c
+
+== the real device of this machine (Windows) ==
+
+FriendlyName            MediaType BusType SizeGB
+------------            --------- ------- ------
+SanDisk SD8TN8U512G1001 SSD       SATA       477
+
+
+== Get-Disk ==
+
+Number FriendlyName            PartitionStyle BusType SizeGB
+------ ------------            -------------- ------- ------
+     0 SanDisk SD8TN8U512G1001 GPT            SATA       477
+
+
+== write caching setting of the system disk ==
+
+Number FriendlyName            IsBoot IsSystem
+------ ------------            ------ --------
+     0 SanDisk SD8TN8U512G1001   True     True
+
+

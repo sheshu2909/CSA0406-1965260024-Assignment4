@@ -1,0 +1,36 @@
+# q6_sim 250 2483.2
+Task 6, stage 5  two designs simulated over 600000 play requests
+
+inputs
+  SSD random read     : 0.250 ms (conservative device latency; the
+        page-cache hits measured on this machine were about 0.005 ms)
+  SSD sequential read : 2483 MB/s (measured)
+  hard disk           : 8.5 ms seek + 0.07 ms queue + 200 MB/s
+  CDN edge / origin   : 15 ms / +120 ms, client at 6.25 MB/s
+  internet path for the company's own servers: +25 ms
+  buffer to fill before playback: 1.25 MB at 6.25 MB/s = 200 ms
+  (the same client cost for both designs)
+
+design                       |    mean |     p50 |     p95 | p99
+-----------------------------+---------+---------+---------+----------
+A own, student on campus     |   201.9 |   200.2 |   208.6 |   208.6 ms
+A own, student at home       |   226.9 |   225.2 |   233.6 |   233.6 ms
+B CDN, student on campus     |   221.0 |   215.0 |   215.0 |   335.0 ms
+B CDN, student at home       |   221.0 |   215.0 |   215.0 |   335.0 ms
+
+mean of the two populations (30% at home)
+  A own servers : 209.4 ms
+  B CDN         : 221.0 ms
+
+monthly cost of the two designs (1.6 PB of viewing)
+  A own: 6.4 TB of disks (128 USD) + 1600000 GB of transit at 0.01 USD = 16000 USD
+  B CDN: 3.2 TB of object storage (74 USD) + 1600000 GB at 0.02 USD = 32000 USD
+
+reading the result: on campus the company's own SSD cache starts
+playback 15 ms sooner than the CDN; for the students at home the
+company's servers lose their advantage to the internet path and the
+CDN is faster.  The CDN also removes the 50 Gbps peak from the
+company's uplink, which is the constraint no cache can fix.
+The measured recommendation is therefore a hybrid: the company's
+servers keep the catalogue and serve campus, and a CDN in front of
+them serves the students at home and absorbs the peak.

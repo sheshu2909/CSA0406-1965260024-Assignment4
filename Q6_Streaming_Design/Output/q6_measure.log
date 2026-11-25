@@ -1,0 +1,15 @@
+# q6_measure
+Task 6, stage 5  measured storage tiers of this machine
+probe file: tmp/q6_probe.bin, 1024 MB
+
+random 4 KB reads  : 5000 reads
+  mean       7.0 us   p50      4.6 us   p95     18.1 us   p99     32.1 us
+  142164 random IOPS (single thread)
+
+sequential read    : 512 MB in 216.2 ms = 2483.2 MB/s
+sequential write   : 256 MB in 878.7 ms = 305.5 MB/s (with fsync)
+
+note: the probe file was just written, so the operating system
+cache answers part of the reads: p50 is a cache hit, p99 is closer to
+the device.  The simulator therefore uses a conservative 0.25 ms
+for an SSD read instead of the 7.0 us cache hit measured here.

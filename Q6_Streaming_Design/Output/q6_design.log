@@ -1,0 +1,41 @@
+# q6_design
+Task 6, stage 4  design and calculations
+
+assumptions
+  students              : 200000
+  lectures              : 4000, mean 800 MB, 90 minutes
+  streaming bitrate     : 5 Mbps
+  peak concurrent share : 5% of the students
+  segment for seeking   : 4 MB
+
+capacity
+  catalogue             : 3200 GB = 3.2 TB
+  with two copies       : 6.4 TB
+  one lecture per minute: 8.89 MB
+  segments per minute   : 2.22 of 4 MB
+
+reads to start playback at an arbitrary minute
+  contiguous allocation : 1 read (one seek to the segment)
+  indexed allocation    : 2 reads (the index block, then the segment)
+  linked allocation     : 1024 reads (walk 4 MB of 4 KB blocks)
+  the index entry for a 4 MB segment needs 1024 pointers of 4 bytes
+  with one index block per 4 MB, the whole 2 GB lecture needs
+  512 segments and 512 index blocks: 2048 KB of metadata per lecture
+
+throughput at the peak
+  concurrent streams    : 10000
+  aggregate bitrate     : 50.0 Gbps
+  two 10 Gbps server NICs would carry 20 Gbps, so the peak
+  cannot be served from one site: a CDN is required, or the peak
+  must be spread over many servers.
+
+transfer per month
+  2000000 views x 800 MB = 1600000 GB = 1.60 PB
+  at 0.02 USD per GB through a CDN: 32000 USD per month
+
+capacity check for the chosen allocation
+  one 4 MB segment as 4 KB blocks = 1024 blocks
+  a 4 KB index block holds 1024 pointers, so one index block
+  covers 1024 blocks = 4 MB, exactly one 4 MB segment.
+  The inode's single-indirect block holds the addresses of those
+  segment index blocks: two levels of index for any minute.

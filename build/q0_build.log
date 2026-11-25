@@ -1,0 +1,20 @@
+$ gcc -std=c11 -Wall -Wextra -O2 src/q1_dirsearch.c -o bin/q1_dirsearch.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q1_growth.c -o bin/q1_growth.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q2_alloc.c -o bin/q2_alloc.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q2_alloc_demo.c -o bin/q2_alloc_demo.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q2_compare.c -o bin/q2_compare.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q2_freespace.c -o bin/q2_freespace.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q2_inode.c -o bin/q2_inode.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q3_checksum.c -o bin/q3_checksum.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q3_meta.c -o bin/q3_meta.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q4_all.c -o bin/q4_all.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q4_sched.c -o bin/q4_sched.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q4_starve.c -o bin/q4_starve.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q5_cache.c -o bin/q5_cache.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q5_replica.c -o bin/q5_replica.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q6_design.c -o bin/q6_design.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q6_measure.c -o bin/q6_measure.exe
+$ gcc -std=c11 -Wall -Wextra -O2 src/q6_sim.c -o bin/q6_sim.exe
+# the two programs of the assignment sheet are also built without -O2
+$ gcc -std=c11 -Wall -Wextra src/q2_alloc.c -o bin/q2_alloc.exe
+$ gcc -std=c11 -Wall -Wextra src/q4_sched.c -o bin/q4_sched.exe

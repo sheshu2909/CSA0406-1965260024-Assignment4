@@ -1,0 +1,59 @@
+# q3_inspect
+== uname -a ==
+MINGW64_NT-10.0-26340 Sheshu-Lap 3.6.12-50c44b7c.x86_64 2026-10-30 16:46 UTC x86_64 Msys
+
+== stat src/q3_meta.c ==
+  File: src/q3_meta.c
+  Size: 5474      	Blocks: 8          IO Block: 65536  regular file
+Device: 16539,51412	Inode: 5348024557719099  Links: 1
+Access: (0644/-rw-r--r--)  Uid: (197610/  SHESHU)   Gid: (197610/  SHESHU)
+Access: 2026-11-25 10:11:55.458031200 +0530
+Modify: 2026-11-25 10:03:00.936862900 +0530
+Change: 2026-11-25 10:03:00.936862900 +0530
+ Birth: 2026-11-25 09:53:54.397564700 +0530
+
+== stat -f . (file-system type, block size, free blocks) ==
+  File: "."
+    ID: 409bc8d400000000 Namelen: 255     Type: UNKNOWN (0x3e72eff)
+Block size: 4096       Fundamental block size: 4096
+Blocks: Total: 45733631   Free: 18252589   Available: 18252589
+Inodes: Total: 18446744073709551615 Free: -1
+
+== df -i . (inodes) ==
+Filesystem     Inodes IUsed IFree IUse% Mounted on
+C:                  -     -     -     - /c
+
+== df -h . (space) ==
+Filesystem      Size  Used Avail Use% Mounted on
+C:              175G  105G   70G  61% /c
+
+== ls -i src | head -8 (inode numbers) ==
+ 6192449488086091 q1_dirsearch.c
+ 9288674231903320 q1_growth.c
+ 9288674231903337 q2_alloc.c
+ 5348024557954747 q2_alloc_demo.c
+ 5629499534214997 q2_compare.c
+12384898975271738 q2_freespace.c
+16044073672509919 q2_inode.c
+ 2814749767323991 q3_checksum.c
+
+== tune2fs -l /dev/sda1 ==
+src/q3_inspect.sh: line 31: tune2fs: command not found
+tune2fs exit status: 127
+
+== dumpe2fs -h /dev/sda1 ==
+src/q3_inspect.sh: line 37: dumpe2fs: command not found
+dumpe2fs exit status: 127
+
+== ext4 tools available here ==
+
+== the real file system of this machine (Windows) ==
+
+DriveLetter FileSystemLabel FileSystem AllocationUnitSize SizeGB FreeGB
+----------- --------------- ---------- ------------------ ------ ------
+          D New Volume      NTFS                     4096  300.3  287.6
+          C                 NTFS                     4096  174.5   69.6
+
+
+== fsutil fsinfo volumeinfo C: ==
+Error 5: Access is denied.

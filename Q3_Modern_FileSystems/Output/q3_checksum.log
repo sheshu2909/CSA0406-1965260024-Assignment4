@@ -1,0 +1,14 @@
+# q3_checksum
+Task 3.1  checksum cost and overhead
+
+  4 KB block    : 51200 checksums over 200 MiB in 508.7 ms = 393 MB/s (9935.4 ns per block)
+  128 KB record : 1600 checksums over 200 MiB in 512.1 ms = 391 MB/s (320062.0 ns per block)
+  (checksum of the test data: C3B841C4)
+
+storage overhead of one checksum per 4 KB block
+  CRC-32 (4 B)                   : 0.098% of the data, 3.9 GB on a 4 TB disk
+  CRC-64 (8 B)                   : 0.195% of the data, 7.8 GB on a 4 TB disk
+  ZFS fletcher/256-bit (32 B)    : 0.781% of the data, 31.2 GB on a 4 TB disk
+
+  one flipped bit: before 5E4E1995, after BC4B00D8 -> detected
+  a second flipped bit: 1A032071 -> detected

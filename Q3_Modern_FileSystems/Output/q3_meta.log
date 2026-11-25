@@ -1,0 +1,12 @@
+# q3_meta
+Task 3.2  cost of one 4 KB update on this machine
+file system of the working directory: see 'stat -f .' below
+  type=UNKNOWN (0x3e72eff) block=4096
+writeback     mean   1203.7 us   median    931.2 us   p95   1824.9 us   4 KB written per update
+journaled     mean   2476.9 us   median   2256.0 us   p95   3657.5 us   8 KB written per update
+copy-on-write mean   2143.8 us   median   2043.7 us   p95   2955.5 us   8 KB written per update
+
+Updates measured : 1000 per pattern
+The journaled and copy-on-write patterns each write the 4 KB twice
+and force two flushes; write-back writes it once and forces one.
+That is the price of being able to recover after a power failure.
